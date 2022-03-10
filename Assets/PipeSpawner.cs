@@ -9,20 +9,23 @@ public class PipeSpawner : MonoBehaviour
     public float yMax;
     public GameObject pipePrefab;
     public float time;
+    BirdMovement bird;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("PipeSpawners",2f,2f);
+        bird = GameObject.Find("Player").GetComponent<BirdMovement>();
+       
+            InvokeRepeating("PipeSpawners",2f,2f);       
     }
-    private void Update()
-    {
-
-    }
-
+  
     private void PipeSpawners()
     {
-        GameObject newPipe = Instantiate(pipePrefab);
-        newPipe.transform.position = new Vector2(transform.position.x, UnityEngine.Random.Range(yMin, yMax));           
+        if (bird.isGameOver == false)
+        {
+            GameObject newPipe = Instantiate(pipePrefab);
+            newPipe.transform.position = new Vector2(transform.position.x, UnityEngine.Random.Range(yMin, yMax));
+        }
+                  
     }
         
       
